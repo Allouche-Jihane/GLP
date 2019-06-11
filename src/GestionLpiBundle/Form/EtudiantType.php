@@ -17,6 +17,7 @@ class EtudiantType extends AbstractType
             ->add('prenom')
             ->add('cne')
             ->add('email')
+            ->add('dateNaissence')
             ->add('dateInscription')
             ->add('adresse');
     }
