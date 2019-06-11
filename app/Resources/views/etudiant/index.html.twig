@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Liste Des Etudiants</h1>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Cne</th>
+                <th>Email</th>
+                <th>Adresse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in etudiants %}
+            <tr>
+                <td><a href="{{ path('GestionEtudiant_show', { 'id': etudiant.id }) }}">{{ etudiant.id }}</a></td>
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.prenom }}</td>
+                <td>{{ etudiant.cne }}</td>
+                <td>{{ etudiant.email }}</td>
+                <td>{{ etudiant.adresse }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('GestionEtudiant_show', { 'id': etudiant.id }) }}"><span class="icon fa-list"></span></a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <a href="{{ path('GestionEtudiant_edit', { 'id': etudiant.id }) }}"><span class="icon fa-pencil"></span> </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    {% if is_granted('ROLE_ADMIN') %}
+     <ul>
+        <li>
+            <a href="{{ path('GestionEtudiant_new') }}">Ajouter un nouveau etudiant</a>
+        </li>
+     </ul>
+    {% endif %}
+{% endblock %}

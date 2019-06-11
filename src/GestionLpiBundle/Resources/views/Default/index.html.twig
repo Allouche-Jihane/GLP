@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+<div style="width: 80%;
+    padding-left: 150px;" >
+            {% if error %}
+                <div class="error">{{ error.message|trans }}</div>
+            {% endif %}
+
+            {% for announce in announces %}
+                <hr class="style14">
+
+                <table>
+                    <tr>
+                        <th>Titre:</th>
+                        <td>{{ announce.titre }}</td>
+                    </tr>
+                    <tr>
+                        <th> ecrit par:</th>
+                        <td>{{ announce.compte.nom }} {{ announce.compte.prenom }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>{{ announce.announceText|raw }}</td>
+                    </tr>
+
+
+                </table>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div style="text-align: right"><a href="{{ path('announce_edit', { 'id': announce.id }) }}">edit</a> -
+                        <a href="{{ path('announce_delete', { 'id': announce.id }) }}">delete</a></div>
+                {% endif %}
+
+
+            {% endfor %}
+</div>
+{% endblock %}

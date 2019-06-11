@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Ajoutation d'une Matiere</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Ajouter" />
+    {{ form_end(form) }}
+
+
+            <a href="{{ path('GestionMatiere_index') }}"><span class="icon fa-backward"> - la liste</a>
+
+{% endblock %}

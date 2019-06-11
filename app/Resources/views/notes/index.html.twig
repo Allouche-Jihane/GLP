@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Notes list</h1>
+    <div class="filtration" style="">
+
+    </div>
+
+<div class="table-wrapper">
+    <table>
+        <tr>
+            <td><input type="text" id="searchCNE" onkeyup="searchcne()" placeholder="cne.." style="width: inherit;"></td>
+            <td><input type="text" id="searchNom" onkeyup="searchname()" placeholder="nom.." style="width: inherit;"></td>
+            <td><input type="text" id="searchPrenom" onkeyup="searchprenom()" placeholder="prenom.." style="width: inherit;"></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="searchNote" onkeyup="searchnote()" placeholder="note.." style="width: inherit;"></td>
+            <td><input type="text" id="searchMatiere" onkeyup="searchmatiere()" placeholder="matiere.." style="width: inherit;"></td>
+            <td><input type="text" id="searchDesc" onkeyup="searchdesc()" placeholder="description.." style="width: inherit;"></td>
+        </tr>
+    </table>
+    <table id="notes">
+        <thead>
+            <tr>
+                <th>cne</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Note</th>
+                <th>Matiere</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for note in notes %}
+            <tr>
+                <td>{{ note.etudiant.cne }}</td>
+                <td>{{ note.etudiant.nom }}</td>
+                <td>{{ note.etudiant.prenom }}</td>
+                <td>{{ note.note }}</td>
+                <td>{{ note.matiere }}</td>
+                <td>{{ note.description }}</td>
+                <td>
+                    <ul>
+                        <li style="list-style: none; display: inline">
+                            <a href="{{ path('gestionNotes_show', { 'id': note.id }) }}"><span class="icon fa-list"></span></a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li style="list-style: none; display: inline">
+                                <a href="{{ path('gestionAbsence_edit', { 'id': note.id }) }}"><span class="icon fa-pencil"></span></a>
+                            </li>
+                        {% elseif note.matiere.id == app.user.matiere.id %}
+                            <a href="{{ path('gestionNotes_edit', { 'id': note.id }) }}"><span class="icon fa-pencil"></span></a>
+
+                        {% else %}
+                            <li style="list-style: none; display: inline">
+                                <a id="ban" href="#"><span class="icon fa-ban"></span></a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <ul>
+        <li>
+            <a href="{{ path('gestionNotes_new') }}">Create a new note</a>
+        </li>
+    </ul>
+    <ul class="pagination">
+        <li><span class="button disabled">Prev</span></li>
+        <li><a href="#" class="page active">1</a></li>
+        <li><a href="#" class="page">2</a></li>
+        <li><a href="#" class="page">3</a></li>
+        <li><span>…</span></li>
+        <li><a href="#" class="page">8</a></li>
+        <li><a href="#" class="page">9</a></li>
+        <li><a href="#" class="page">10</a></li>
+        <li><a href="#" class="button">Next</a></li>
+    </ul>
+{% endblock %}
+{% block javaScript %}
+    <!-- Scripts -->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/skel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/util.js') }}"></script>
+    <!--[if lte IE 8]><script src="{{ asset('assets/js/ie/respond.min.js') }}"></script><![endif]-->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/javaScriptNote.js') }}"></script>
+    <script src="{{ asset('assets/js/custom_js.js') }}"></script>
+
+
+{% endblock %}

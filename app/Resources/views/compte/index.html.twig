@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>liste des comptes</h1>
+<div class="table-wrapper">
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Login</th>
+                <th>Status</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compte in comptes %}
+            <tr>
+                <td><a href="{{ path('GestionCompte_show', { 'id': compte.id }) }}">{{ compte.id }}</a></td>
+                <td>{{ compte.nom }}</td>
+                <td>{{ compte.prenom }}</td>
+                <td>{{ compte.login }}</td>
+                <td>{{ compte.status }}</td>
+                <td>{{ compte.email }}</td>
+                <td>
+                            <a href="{{ path('GestionCompte_show', { 'id': compte.id }) }}"><span class="icon fa-list"></a>
+
+                            <a href="{{ path('GestionCompte_edit', { 'id': compte.id }) }}"><span class="icon fa-pencil"></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+            <a href="{{ path('ajouterCompte') }}">ajouter un nouveau Compte</a>
+
+{% endblock %}

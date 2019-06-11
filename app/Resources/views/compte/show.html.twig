@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Compte</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ compte.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ compte.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ compte.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Login</th>
+                <td>{{ compte.login }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ compte.password }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ compte.status }}</td>
+            </tr>
+            <tr>
+                <th>Datecreation</th>
+                <td>{% if compte.dateCreation %}{{ compte.dateCreation|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datemodification</th>
+                <td>{% if compte.dateModification %}{{ compte.dateModification|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ compte.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Supprimer">
+    {{ form_end(delete_form) }}
+
+
+
+    <a href="{{ path('GestionCompte_index') }}"><span class="icon fa-backward"> - la liste</a>
+        <br>
+            <a href="{{ path('GestionCompte_edit', { 'id': compte.id }) }}"><span class="icon fa-pencil"> modifier</a>
+        <br><br>
+
+{% endblock %}

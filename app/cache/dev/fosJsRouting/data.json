@@ -1,0 +1,1 @@
+{"gestionAbsence_new":{"tokens":[["text","\/gestionAbsence\/new"]],"defaults":[],"requirements":{"_method":"GET|POST"},"hosttokens":[]},"gestionNotes_new":{"tokens":[["text","\/gestionNotes\/new"]],"defaults":[],"requirements":{"_method":"GET|POST"},"hosttokens":[]}}

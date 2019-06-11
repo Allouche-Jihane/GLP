@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>list des etudiants</h1>
+                    <div id="message" style="margin: 30px 0;">
+
+
+                    </div>
+                   <div>
+                       <label for="Desc" style="display: inline">Nom ou id pour la note: </label>
+                       <input type="text" id="Desc" name="Desc">
+                       {% if matieres is defined %}
+                       <select name="matiere" id="matiere" style="width: 200px!important; display: inline; max-height: 30px;">
+                           {% for matiere in matieres %}
+                               {% if is_granted('ROLE_ADMIN') %}
+                                   <option value="{{ matiere.id }}" selected>{{ matiere.nomMatiere }}</option>
+                               {% elseif matiere.id == app.user.matiere.id %}
+                                   <option value="{{ matiere.id }}" selected>{{ matiere.nomMatiere }}</option>
+
+                               {% else %}
+                                   <option value="{{ matiere.id }}" disabled>{{ matiere.nomMatiere }}</option>
+                               {% endif %}
+                           {% endfor %}
+                       </select>
+                       {% endif %}
+                       <br><br><br>
+                   </div>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>CNE : </th>
+                <th>Nom :</th>
+                <th>Prenom :</th>
+                <th>Note:</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in etudiands %}
+            <tr>
+                <td><a href="{{ path('GestionEtudiant_show', { 'id': etudiant.id }) }}">{{ etudiant.cne }}</a></td>
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.prenom }}</td>
+                <td>
+                    <ul>
+                        </li>
+                            <div style="display: none">
+                                <input  data-etId="{{ etudiant.id }}" id="note_{{ etudiant.id }}" name="note_{{ etudiant.id }}" value="{{ etudiant.id }}" checked="checked" type="checkbox" style="display: none"/>
+                                <label for="note_{{ etudiant.id }}" class="label-danger"></label>
+                            </div>
+                            <div class="material-switch" style="display: inline">
+
+                                    <input  data-etId="{{ etudiant.id }}" id="note1_{{ etudiant.id }}" name="note1_{{ etudiant.id }}" type="number"/>
+                                    <label for="note1_{{ etudiant.id }}" class="label-danger"></label>
+
+                            </div>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+
+                            <a href="{{ path('GestionEtudiant_show', { 'id': etudiant.id }) }}"><span class="icon fa-list"></span></a>
+
+
+                            <a href="{{ path('GestionEtudiant_edit', { 'id': etudiant.id }) }}"><span class="icon fa-pencil"></span></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="span12" >
+        <button class=" btn btn-primary pull-right" id="submit">Valider</button>
+    </div>
+</div>
+
+{% endblock %}
+{% block javaScript %}
+    <!-- Scripts -->
+    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/js/skel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/util.js') }}"></script>
+    <!--[if lte IE 8]><script src="{{ asset('assets/js/ie/respond.min.js') }}"></script><![endif]-->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/javaScriptNote.js') }}"></script>
+{% endblock %}

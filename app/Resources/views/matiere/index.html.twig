@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Matieres list</h1>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nommatiere</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for matiere in matieres %}
+            <tr>
+                <td><a href="{{ path('GestionMatiere_show', { 'id': matiere.id }) }}">{{ matiere.id }}</a></td>
+                <td>{{ matiere.nomMatiere }}</td>
+                <td>{{ matiere.description }}</td>
+                <td>
+                            <a href="{{ path('GestionMatiere_show', { 'id': matiere.id }) }}"><span class="icon fa-list"></a>
+
+                            <a href="{{ path('GestionMatiere_edit', { 'id': matiere.id }) }}"><span class="icon fa-pencil"></a>
+
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+    <br>
+            <a href="{{ path('GestionMatiere_new') }}">Ajouter une nouvelle matiere</a>
+
+{% endblock %}

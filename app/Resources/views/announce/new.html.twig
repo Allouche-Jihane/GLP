@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {#<h1>New Announce</h1>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="submit" value="Create" />
+    {{ form_end(form) }}#}
+
+
+
+    <h1>nouvelle Annonce</h1>
+    <form action="{{ path('announce_new') }}" method="post">
+        {{ form_row(form._token) }}
+        {{ form_errors(form) }}
+        <table>
+            <tbody>
+            <tr>
+                <td></td>
+                <td>{{ form_row(form.titre) }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{ form_row(form.announceText) }}
+
+                    <script type="text/javascript" >
+                        CKEDITOR.replace("gestionlpibundle_announce_announceText");
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{ form_row(form.Sauvgarder) }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><a href="{{ path('announce_index') }}"><span class="icon fa-backward"></span></a> - la liste</td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+{% endblock %}

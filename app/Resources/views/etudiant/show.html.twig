@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Etudiant</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ etudiant.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ etudiant.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ etudiant.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Cne</th>
+                <td>{{ etudiant.cne }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ etudiant.email }}</td>
+            </tr>
+            <tr>
+                <th>Datenaissence</th>
+                <td>{% if etudiant.dateNaissence %}{{ etudiant.dateNaissence|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Dateinscription</th>
+                <td>{% if etudiant.dateInscription %}{{ etudiant.dateInscription|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ etudiant.adresse }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {{ form_start(delete_form) }}
+    <input type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+<br><br>
+            <a href="{{ path('GestionEtudiant_index') }}"><span class="icon fa-backward"> - la liste</a>
+<br>
+
+        {% if is_granted('ROLE_ADMIN') %}
+
+            <a href="{{ path('GestionEtudiant_edit', { 'id': etudiant.id }) }}"><span class="icon fa-pencil">- modifier</a>
+            <br>
+        {% endif %}
+
+
+
+
+{% endblock %}

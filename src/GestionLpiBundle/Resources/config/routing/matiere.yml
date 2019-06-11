@@ -1,0 +1,24 @@
+GestionMatiere_index:
+    path:     /
+    defaults: { _controller: "GestionLpiBundle:Matiere:index" }
+    methods:  GET
+
+GestionMatiere_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionLpiBundle:Matiere:show" }
+    methods:  GET
+
+GestionMatiere_new:
+    path:     /new
+    defaults: { _controller: "GestionLpiBundle:Matiere:new" }
+    methods:  [GET, POST]
+
+GestionMatiere_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionLpiBundle:Matiere:edit" }
+    methods:  [GET, POST]
+
+GestionMatiere_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionLpiBundle:Matiere:delete" }
+    methods:  DELETE

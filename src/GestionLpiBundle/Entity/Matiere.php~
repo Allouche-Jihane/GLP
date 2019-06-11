@@ -1,0 +1,123 @@
+<?php
+
+namespace GestionLpiBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Matiere
+ *
+ * @ORM\Table(name="matiere")
+ * @ORM\Entity(repositoryClass="GestionLpiBundle\Repository\MatiereRepository")
+ */
+class Matiere
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nomMatiere", type="string", length=255)
+     */
+    private $nomMatiere;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $description;
+
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Absence", mappedBy="matiere")
+     *
+     */
+    private $absences;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Notes", mappedBy="matiere")
+     *
+     */
+    private $notes;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Module", inversedBy="matieres")
+     * @ORM\JoinColumn(name="id_module", referencedColumnName="id")
+     *
+     */
+    private $module;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Compte", inversedBy="matiere")
+     * @ORM\JoinColumn(name="compte_id", referencedColumnName="id")
+     *
+     */
+    private $compte;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nomMatiere
+     *
+     * @param string $nomMatiere
+     * @return Matiere
+     */
+    public function setNomMatiere($nomMatiere)
+    {
+        $this->nomMatiere = $nomMatiere;
+
+        return $this;
+    }
+
+    /**
+     * Get nomMatiere
+     *
+     * @return string 
+     */
+    public function getNomMatiere()
+    {
+        return $this->nomMatiere;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Matiere
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+}

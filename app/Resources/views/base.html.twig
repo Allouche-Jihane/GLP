@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Gestion LPI</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <!--[if lte IE 8]><script src="{{ asset('assets/js/ie/html5shiv.js') }}"></script><![endif]-->
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="{{ asset('assets/css/ie9.css') }}" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="{{ asset('assets/css/ie8.css') }}" /><![endif]-->
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="//cdn.ckeditor.com/4.7.0/standard/ckeditor.js"></script>
+    {% block javaScript %}
+        <!-- Scripts -->
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/custom_js.js') }}"></script>
+        <script src="{{ asset('assets/js/skel.min.js') }}"></script>
+        <script src="{{ asset('assets/js/util.js') }}"></script>
+        <!--[if lte IE 8]><script src="{{ asset('assets/js/ie/respond.min.js') }}"></script><![endif]-->
+        <script src="{{ asset('assets/js/main.js') }}"></script>
+        <script src="{{ asset('assets/js/javaScript.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
+    {% endblock %}
+
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+
+        <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+                <a href="{{ path('gestion_lpi_home') }}" class="logo"><strong>Gestion LPI</strong> ESTO</a>
+
+                <ul class="icons">
+                    <li>
+                        {% if is_granted('ROLE_USER') == false %}
+                            <nav>
+
+                                <aside class="menu">
+                                    <div class="menu-content">
+                                        <i class="fa fa-unlock-alt"></i><a href="#" id="login">Login</a>
+                                    </div>
+                                    <div class="arrow-up"></div>
+                                </aside>
+                                <div class="login-form" style="text-align: -webkit-left;">
+                                    <form action="{{ path('login_check') }}" method="post">
+                                        <label for="username">Username:</label>
+                                        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+                                        <label for="password">Password:</label>
+                                        <input type="password" id="password" name="_password" />
+
+                                        <button type="submit" class="btn btn-primary pull-right" style="margin-top: 5px;margin-bottom: 5px;">login</button>
+                                    </form>
+                                </div>
+                            </nav>
+
+                            <script type="text/javascript">
+
+                                $(document).ready(function(){
+                                    var arrow = $(".arrow-up");
+                                    var form = $(".login-form");
+                                    var status = false;
+                                    $("#login").click(function(event){
+                                        event.preventDefault();
+                                        if(status == false){
+                                            arrow.fadeIn();
+                                            form.fadeIn();
+                                            status = true;
+                                        }else{
+                                            arrow.fadeOut();
+                                            form.fadeOut();
+                                            status = false;
+                                        }
+                                    })
+                                })
+
+                            </script>
+
+                        {% endif %}
+                    </li>
+                    {% if is_granted('ROLE_USER') %}
+                    <li>{{ app.user.login }}</li>
+                    <li><a href="{{ path('logout') }}">Logout</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_USER') == false %}
+                    <li>
+                        <img src="{{ asset('images/esto_ump.gif') }}" width="50%" height="50%">
+                    </li>
+                    {% endif %}
+                </ul>
+
+
+            </header>
+
+
+            <!-- Body -->
+            {% block body %}
+
+
+            {% endblock %}
+
+
+        </div>
+    </div>
+{% if is_granted('ROLE_USER') %}
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="inner">
+
+            <!-- Search -->
+            <section id="search" class="alt">
+                <img src="{{ asset('images/esto_ump.gif') }}">
+            </section>
+
+            <!-- Menu -->
+            <nav id="menu">
+                <header class="major">
+                    <h2>Menu</h2>
+                </header>
+                <ul>
+                    <li><a href="{{ path('gestion_lpi_home') }}">Homepage</a></li>
+                    <li><a href="{{ path('GestionEtudiant_index') }}">Etudiants</a></li>
+                    <li><a href="{{ path('GestionMatiere_index') }}">Matiers</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li>
+                            <span class="opener">Comptes</span>
+                            <ul>
+                                <li><a href="{{ path('GestionCompte_index') }}">Gestion des Comptes</a></li>
+                                <li><a href="{{ path('ajouterCompte') }}">ajouter</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+
+                    <li><a href="{{ path('gestionAbsence_index') }}">Absences</a></li>
+                    <li><a href="{{ path('gestionNotes_index') }}">Notes</a></li>
+                    <li>
+                        <span class="opener">Announces</span>
+                        <ul>
+                            <li><a href="{{ path('announce_index') }}">les Announces</a></li>
+                            <li><a href="{{ path('announce_new') }}">Ajouter announce</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Section -->
+            <section>
+                <header class="major">
+                    <h2>autre</h2>
+                </header>
+                <div class="mini-posts">
+                    <article>
+                        <a href="http://esto.ump.ma/index.php/2016-05-10-15-57-08/dept-gi" class="image"><img src="{{ asset('images/infodepart.jpg') }}" alt="" />DÉPARTEMENT GI
+                        </a>
+                        <p>Offre une formation complète et très pointue dans un domaine toujours en mutation avec des révolutions continues en NTIC, E-Learning...</p>
+                    </article>
+                </div>
+                <ul class="actions">
+                    <li><a href="http://esto.ump.ma/index.php/2016-05-10-15-57-08/dept-gi" class="button">More</a></li>
+                </ul>
+            </section>
+
+            <!-- Section -->
+            <section>
+                <header class="major">
+                    <h2>NOUS CONTACTER</h2>
+                </header>
+                <p>
+                    pour toute question , demande d'information concernant les études , l'internat, ou autres ... contactez nous.
+                </p>
+                <ul class="contact">
+                    <li class="fa-envelope-o"><a href="#">esto.webmaster@ump.ma <br>support.esto@ump.ma</a></li>
+                    <li class="fa-phone">+212 36 500 224</li>
+                    <li class="fa-fax">+212 36 500 223</li>
+                    <li class="fa-home">BP 473 Complexe universitaire <br />
+                        Al Qods Oujda 60000</li>
+                </ul>
+            </section>
+
+            <!-- Footer -->
+            <footer id="footer">
+                <p class="copyright">&copy; Conditions d'utilisation <a href="http://esto.ump.ma/images/esto/Charte_vie_privee1.pdf">Charte de vie privée</a> <a href="http://esto.ump.ma/">ESTO</a>, tous droits réservés.</p>
+            </footer>
+
+        </div>
+    </div>
+{% endif %}
+</div>
+
+</body>
+</html>

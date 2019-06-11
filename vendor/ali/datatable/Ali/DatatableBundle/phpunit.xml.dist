@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="./Tests/bootstrap.php" colors="true">
+    
+    <php>
+        <!--<server name="KERNEL_DIR" value="./Tests" />-->
+    </php>
+
+    <testsuites>
+        <testsuite name="AliDatatableBundle test suite">
+            <directory suffix="Test.php">./Tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory>./</directory>
+            <exclude>
+                <directory>./Tests/config</directory>
+                <directory>./Tests/TestBundle/Controller</directory>
+                <directory>./Tests/TestBundle/Entity</directory>
+                <directory>./Tests/TestBundle/Resources</directory>
+                <directory>./vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

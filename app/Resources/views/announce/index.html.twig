@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+
+    {% for announce in announces %}
+        <hr class="style14">
+
+        <table>
+            <tr>
+                <th>Titre:</th>
+                <td>{{ announce.titre }}</td>
+            </tr>
+            <tr>
+                <th> ecrit par:</th>
+                <td>{{ announce.compte.nom }} {{ announce.compte.prenom }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>{{ announce.announceText|raw }}</td>
+            </tr>
+
+
+        </table>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div style="text-align: right"><a href="{{ path('announce_edit', { 'id': announce.id }) }}"><span class="icon fa-pencil"></span></a>
+                <a href="{{ path('announce_delete', { 'id': announce.id }) }}"><span class="icon fa-remove"></span></a></div>
+            {% elseif announce.compte.id == app.user.id  %}
+                <div style="text-align: right"><a href="{{ path('announce_edit', { 'id': announce.id }) }}"><span class="icon fa-pencil"></span></a>
+                    <a href="{{ path('announce_delete', { 'id': announce.id }) }}"><span class="icon fa-remove"></span></a></div>
+        {% endif %}
+
+
+    {% endfor %}
+
+
+    <ul>
+        <li>
+            <a href="{{ path('announce_new') }}">Ajouter une announce</a>
+        </li>
+    </ul>
+{% endblock %}

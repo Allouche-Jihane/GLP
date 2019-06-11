@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>liste d'absences</h1>
+    <ul>
+        <li style="list-style: none">
+            <a href="{{ path('gestionAbsence_new') }}" ></span>Ajouter Absence</a>
+        </li>
+    </ul>
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Dateabsence</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>Nombreheurs</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for absence in absences %}
+            <tr>
+                <td><a href="{{ path('gestionAbsence_show', { 'id': absence.id }) }}">{{ absence.id }}</a></td>
+                <td>{% if absence.dateAbsence %}{{ absence.dateAbsence|date('Y-m-d ') }}{% endif %}</td>
+                <td>{{ absence.etudiant.nom }}</td>
+                <td>{{ absence.etudiant.prenom }}</td>
+                <td>{{ absence.nombreHeurs }}</td>
+                <td>
+                    <ul>
+                        <li style="list-style: none; display: inline">
+                            <a href="{{ path('gestionAbsence_show', { 'id': absence.id }) }}"><span class="icon fa-list"></span></a>
+                        </li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li style="list-style: none; display: inline">
+                            <a href="{{ path('gestionAbsence_edit', { 'id': absence.id }) }}"><span class="icon fa-pencil"></span></a>
+                        </li>
+                        {% elseif absence.matiere.id == app.user.matiere.id %}
+                        <a href="{{ path('gestionAbsence_edit', { 'id': absence.id }) }}"><span class="icon fa-pencil"></span></a>
+                        {% else %}
+                        <li style="list-style: none; display: inline">
+                            <a id="ban" href="#"><span class="icon fa-ban"></span></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

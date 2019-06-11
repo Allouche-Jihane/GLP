@@ -1,0 +1,39 @@
+security:
+    encoders:
+        GestionLpiBundle\Entity\Compte: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        our_database_Comptes:
+            entity: { class: GestionLpiBundle:Compte, property: login }
+
+    firewalls:
+        secured_area:
+            pattern:    ^/
+            form_login:
+                check_path: login_check
+                login_path: gestion_lpi_homepage
+                always_use_default_target_path: true
+                default_target_path: /announce
+            logout:
+                path:   logout
+                target: gestion_lpi_home
+            anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY}
+        - { path: ^/GestionCompte, roles: ROLE_ADMIN}
+        - { path: ^/GestionEtudiant, roles: ROLE_USER}
+        - { path: ^/home, roles: ROLE_USER}
+        - { path: ^/ajouterCompte , roles: ROLE_ADMIN}
+        - { path: ^/announce , roles: ROLE_USER}
+        - { path: ^/gestionAbsence , roles: ROLE_USER}
+        - { path: ^/gestionNotes , roles: ROLE_USER}
+
+
+

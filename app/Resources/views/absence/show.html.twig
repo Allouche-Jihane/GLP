@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Absence</h1>
+<div class="table-wrapper">
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ absence.id }}</td>
+            </tr>
+            <tr>
+                <th>Dateabsence</th>
+                <td>{% if absence.dateAbsence %}{{ absence.dateAbsence|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Nombreheurs</th>
+                <td>{{ absence.nombreHeurs }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    <ul>
+        <li>
+            <a href="{{ path('gestionAbsence_index') }}">Back to the list</a>
+        </li>
+        {% if is_granted('ROLE_ADMIN') %}
+        <li>
+            <a href="{{ path('gestionAbsence_edit', { 'id': absence.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+        {% endif %}
+    </ul>
+{% endblock %}

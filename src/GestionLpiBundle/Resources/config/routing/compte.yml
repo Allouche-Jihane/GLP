@@ -1,0 +1,24 @@
+GestionCompte_index:
+    path:     /
+    defaults: { _controller: "GestionLpiBundle:Compte:index" }
+    methods:  GET
+
+GestionCompte_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionLpiBundle:Compte:show" }
+    methods:  GET
+
+GestionCompte_new:
+    path:     /new
+    defaults: { _controller: "GestionLpiBundle:Compte:new" }
+    methods:  [GET, POST]
+
+GestionCompte_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionLpiBundle:Compte:edit" }
+    methods:  [GET, POST]
+
+GestionCompte_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionLpiBundle:Compte:delete" }
+    methods:  DELETE

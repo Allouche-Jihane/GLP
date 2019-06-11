@@ -1,0 +1,10 @@
+gestion_lpi:
+    resource: "@GestionLpiBundle/Resources/config/routing.yml"
+    prefix:   /
+
+gestionlpi_controller:
+    resource: "@GestionLpiBundle/Controller"
+    type: annotation
+# this routing is used to generate JavaScript urls dynamicaly don't remove it :)
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

@@ -1,0 +1,24 @@
+GestionEtudiant_index:
+    path:     /
+    defaults: { _controller: "GestionLpiBundle:Etudiant:index" }
+    methods:  GET
+
+GestionEtudiant_show:
+    path:     /{id}/show
+    defaults: { _controller: "GestionLpiBundle:Etudiant:show" }
+    methods:  GET
+
+GestionEtudiant_new:
+    path:     /new
+    defaults: { _controller: "GestionLpiBundle:Etudiant:new" }
+    methods:  [GET, POST]
+
+GestionEtudiant_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GestionLpiBundle:Etudiant:edit" }
+    methods:  [GET, POST]
+
+GestionEtudiant_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GestionLpiBundle:Etudiant:delete" }
+    methods:  DELETE

@@ -1,0 +1,39 @@
+gestion_lpi_GestionCompte:
+    resource: "@GestionLpiBundle/Resources/config/routing/compte.yml"
+    prefix:   /GestionCompte
+
+gestion_lpi_homepage:
+    path:     /
+    defaults: { _controller: GestionLpiBundle:Default:index }
+login_check:
+    path:     /check
+    defaults: { _controller: GestionLpiBundle:Default:loginCheck }
+logout:
+    path:     /logout
+    defaults: { _controller: GestionLpiBundle:Default:logout }
+
+gestion_lpi_home:
+    path: /home
+    defaults: { _controller: GestionLpiBundle:Default:home}
+
+
+gestion_lpi_GestionEtudiant:
+    resource: "@GestionLpiBundle/Resources/config/routing/etudiant.yml"
+    prefix:   /GestionEtudiant
+
+
+gestion_lpi_GestionMatiere:
+    resource: "@GestionLpiBundle/Resources/config/routing/matiere.yml"
+    prefix:   /GestionMatiere
+
+gestion_lpi_announce:
+    resource: "@GestionLpiBundle/Resources/config/routing/announce.yml"
+    prefix:   /announce
+
+gestion_lpi_gestionAbsence:
+    resource: "@GestionLpiBundle/Resources/config/routing/absence.yml"
+    prefix:   /gestionAbsence
+
+gestion_lpi_gestionNotes:
+    resource: "@GestionLpiBundle/Resources/config/routing/notes.yml"
+    prefix:   /gestionNotes

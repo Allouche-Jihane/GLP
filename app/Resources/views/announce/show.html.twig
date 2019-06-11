@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Announce</h1>
+<div class="table-wrapper">
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ announce.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ announce.titre }}</td>
+            </tr>
+            <tr>
+                <th>Announcetext</th>
+                <td>{{ announce.announceText }}</td>
+            </tr>
+            <tr>
+                <th>Datecreation</th>
+                <td>{% if announce.dateCreation %}{{ announce.dateCreation|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Datemodification</th>
+                <td>{% if announce.dateModification %}{{ announce.dateModification|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+            <a href="{{ path('announce_index') }}"><span class="fa-backward"></span> - la liste  </a>
+        <br>
+            <a href="{{ path('announce_edit', { 'id': announce.id }) }}"><span class="fa-pencil"></span> - modifier</a>
+       <br>
+    <br>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Supprimer">
+            {{ form_end(delete_form) }}
+
+{% endblock %}
